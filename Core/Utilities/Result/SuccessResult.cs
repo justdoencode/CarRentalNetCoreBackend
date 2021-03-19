@@ -8,7 +8,7 @@ namespace Core.Utilities.Result
     {
         public SuccessResult(string message):base(true,message)
         {
-                
+            Console.WriteLine(message);
         }
         public SuccessResult():base(true)
         {

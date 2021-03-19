@@ -8,7 +8,7 @@ namespace Core.Utilities.Result
     {
         public ErrorResult(string message):base(false,message)
         {
-
+            Console.WriteLine(message);
         }
         public ErrorResult():base(false)
         {

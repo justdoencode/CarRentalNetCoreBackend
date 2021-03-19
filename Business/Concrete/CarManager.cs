@@ -35,6 +35,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
+            foreach (var item in _carDal.GetAll())
+            {
+                Console.WriteLine(item.Description);
+            }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
@@ -50,6 +54,10 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
+            foreach (var item in _carDal.GetAll(c => c.BrandId == id))
+            {
+                Console.WriteLine(item.Description);
+            }
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
         }
 
