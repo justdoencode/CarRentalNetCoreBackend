@@ -11,7 +11,7 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             //Console.WriteLine("****************Arabalar**************");
-            CarCRUD();
+            //CarCRUD();
             //Console.WriteLine("****************Renkler**************");
             //ColorCRUD();
             //Console.WriteLine("****************Markalar**************");
@@ -22,10 +22,17 @@ namespace ConsoleUI
             //UserCRUD();
             //Console.WriteLine("****************Rental**************");
             //RentalCRUD();
+            CarImageCRUD();
 
             Console.WriteLine("İşlem Gerçekleşti");
 
             
+        }
+
+        private static void CarImageCRUD()
+        {
+            CarImageManager carImageManager = new CarImageManager(new EfCarImageDal());
+            //carImageManager.Add(new CarImage {Id=1, CarId = 1,ImagePath= "5fcf374755427f1020984ea9.jpg" });
         }
 
         private static void RentalCRUD()
