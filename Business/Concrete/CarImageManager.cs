@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.FileHelper;
 using Core.Utilities.Result;
@@ -20,7 +22,7 @@ namespace Business.Concrete
         {
             _carImageDal = carImageDal;
         }
-
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(CarImage carImage,IFormFile file)
         {
             IResult result = BusinessRules.Run(CheckMaxCarImage(carImage.CarId));
@@ -60,7 +62,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<CarImage>(_carImageDal.Get(c => c.Id == id));
         }
-
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(CarImage carImage,IFormFile file)
         {
             carImage.ImagePath = CarImageFileHelper.Update(_carImageDal.Get(c => c.Id == carImage.Id).ImagePath, file);

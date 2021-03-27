@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspect.Autofac.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,7 +18,7 @@ namespace Business.Concrete
         {
             _customerDal = customerDal;
         }
-
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(Customer customer)
         {
             _customerDal.Add(customer);
@@ -33,7 +35,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Customer>>(_customerDal.GetAll());
         }
-
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);
