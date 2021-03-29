@@ -1,6 +1,7 @@
 ﻿using Core.Entities.Concreate;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -19,5 +20,7 @@ namespace Business.Constants
         public static string SuccessfulLogin="Giriş Başarılı";
         public static string UserAlreadyExists="Kullanıcı Mevcut";
         public static string AccessTokenCreated="Token Oluşturuldu";
+        public static string AuthorizationDenied="Yetkiniz Yok!";
+        public static string CarUpdated="Araba Güncellendi";
     }
 }
