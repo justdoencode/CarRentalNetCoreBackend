@@ -24,6 +24,8 @@ namespace DataAccess.Concrete.EntityFramework
                              on car.ColorId equals color.Id
                              join images in context.CarImages
                              on car.Id equals images.CarId
+                             join rental in context.Rentals
+                             on car.Id equals rental.CarId
                              select new CarDetailDto
                              {
                                  Id = car.Id,
@@ -32,9 +34,38 @@ namespace DataAccess.Concrete.EntityFramework
                                  BrandName = brand.Name,
                                  DailyPrice = car.DailyPrice,
                                  ModelYear = car.ModelYear,
-                                 CarImage=images.ImagePath
+                                 CarImage=images.ImagePath,
+                                 RentDate=rental.RentDate,
+                                 ReturnDate=rental.ReturnDate
                              };
                 return result.SingleOrDefault(filter);
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailByIdList(Expression<Func<CarDetailDto, bool>> filter = null)
+        {
+            using (ReCapProjectDatabaseContext context = new ReCapProjectDatabaseContext())
+            {
+                var result = from car in context.Cars
+                             join brand in context.Brands
+                             on car.BrandId equals brand.Id
+                             join color in context.Colors
+                             on car.ColorId equals color.Id
+                             join images in context.CarImages
+                             on car.Id equals images.CarId
+                             select new CarDetailDto
+                             {
+                                 Id = car.Id,
+                                 BrandId = brand.Id,
+                                 ColorId = color.Id,
+                                 Description = car.Description,
+                                 ColorName = color.Name,
+                                 BrandName = brand.Name,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear,
+                                 CarImage = images.ImagePath
+                             };
+                return result.Where(filter).ToList();
             }
         }
 
